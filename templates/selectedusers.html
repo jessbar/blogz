@@ -6,11 +6,11 @@
     <p>This user hasn't made any blog posts.</p>
 {% else %}
     {% for post in posts | reverse %}
-    <h3><a href="/blog?id={{ post.id }}">{{post.title}}</a></h3>
+    <h3><a href="/blog?id={{ post.id }}">{{ post.title }}</a></h3>
     <p>{{ post.body }}</p>
     {% for user in users %}
         {% if post.owner_id == user.id  %}
-            <p style="font-size: small">Written by <a href="/blog?user_id={{post.owner_id}}">{{user.username}}</a></p>
+            <p style="font-size: small">Written by <a href="/blog?user_id={{post.owner_id}}">{{ user.username }}</a></p>
         {% endif %}
     {% endfor %}
     <hr />
