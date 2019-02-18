@@ -43,7 +43,7 @@ def index():
     user_id = request.args.get("user_id")
     if user_id:
         posts = Blog.query.filter_by(owner_id=user_id).all()
-        return render_template("selecteduser.html", users=users, posts=posts)
+        return render_template("selected_users.html", users=users, posts=posts)
     return render_template("index.html", users=users)
 
 @app.route("/blog")
@@ -54,11 +54,11 @@ def blog():
     users = User.query.all()
     if user_id:
         posts = Blog.query.filter_by(owner_id=user_id).all()
-        return render_template("selecteduser.html", posts=posts, users=users)
+        return render_template("selected_users.html", posts=posts, users=users)
     if post_id:
         post = Blog.query.get(post_id)
-        return render_template("selectedpost.html", post=post, users=users)
-    return render_template("blog.html", posts=posts, users=users)
+        return render_template("single_post.html", post=post, users=users)
+    return render_template("main_blog.html", posts=posts, users=users)
 
 @app.route("/newpost", methods=['POST', 'GET'])
 def newpost():
@@ -78,7 +78,7 @@ def newpost():
             db.session.commit()
             post_url = "/blog?id=" + str(new_post.id)
             return redirect(post_url)
-    return render_template("newpost.html", title_error=title_error, body_error=body_error)
+    return render_template("add_blog.html", title_error=title_error, body_error=body_error)
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():
